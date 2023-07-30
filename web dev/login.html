@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url(background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; z-index: -1;"></div>
+    <div style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: transparent;">
+        <h2 style="text-align: center; color:white; font-weight: bold;">Login Form</h2>
+        <form onsubmit="return validateLogin()">
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;color:white; font-weight: bold;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" style="padding: 8px; border: 1px solid #ccc; border-radius: 25px;">
+            </div>
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;color:white; font-weight: bold;">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" style="padding: 8px; border: 1px solid #ccc;border-radius: 25px;">
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <input type="submit" value="Login"  style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;border-radius: 25px;">
+            </div>
+        </form>
+        <script>
+            function validateLogin() {
+                // Retrieve the registration data from localStorage
+                var storedData = localStorage.getItem('registrationData');
+                if (!storedData) {
+                    alert('Please register first.');
+                    return false;
+                }
+
+                // Parse the JSON string back into an object
+                var registrationData = JSON.parse(storedData);
+
+                // Get the entered credentials
+                var enteredUsername = document.getElementById('username').value;
+                var enteredPassword = document.getElementById('password').value;
+
+                // Check if the entered credentials match the stored registration data
+                if (enteredUsername === registrationData.username && enteredPassword === registrationData.password) {
+                    alert('Login successful!');
+                    return true;
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                    return false;
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

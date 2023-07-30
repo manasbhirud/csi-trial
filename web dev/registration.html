@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Page</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url(background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; z-index: -1;"></div>
+    <div style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: transparent;">
+        <h2 style="text-align: center; color:white; font-weight: bold;">Registration Form</h2>
+        <form onsubmit="return validateRegistration()">
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;color:white; font-weight: bold;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" style="padding: 8px; border: 1px solid #ccc; border-radius: 25px;">
+            </div>
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;color:white; font-weight: bold;">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" style="padding: 8px; border: 1px solid #ccc;border-radius: 25px;">
+            </div>
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;color:white; font-weight: bold;">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" style="padding: 8px; border: 1px solid #ccc;border-radius: 25px;">
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <input type="submit" value="Register"  style="padding: 10px 20px; background-color: #4c7aaf; color: white; border: none; cursor: pointer;border-radius: 25px;">
+            </div>
+           
+        </form>
+        <script>
+            function validateRegistration(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+        
+                // Check if the user is already registered
+                var storedData = localStorage.getItem('registrationData');
+                if (storedData) {
+                    alert('You are already registered. Please log in.');
+                    return false; // Prevent the registration from proceeding
+                }
+        
+                // User is not already registered, proceed with registration
+                var username = document.getElementById('username').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+        
+                // Store the registration data in localStorage
+                var registrationData = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+        
+                // Convert the data to a JSON string and store it
+                localStorage.setItem('registrationData', JSON.stringify(registrationData));
+        
+                alert('Registration successful!'); // Show a success message
+        
+                // Optionally, you can redirect to another page here if needed
+                // window.location.href = 'login.html';
+        
+                return false; // Return false to prevent form submission (we've handled it with JavaScript)
+            }
+        </script>
+        
+    </div>
+</body>
+
+</html>
